@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple SAML Identity Provider ({{idp.issuer}})</title>
+    <style type="text/css">
+        html {
+            height: auto;
+        }
+        body {
+            margin: 20px;
+            font-family: 'Open Sans', sans-serif;
+            color: rgb(96, 100, 113);
+            background-color: #e9eaef;
+        }
+        .container {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              width: 100%;
+              height: 100%;
+              max-width: 800px;
+              margin: 0 auto;
+              padding-left:15px;
+              padding-right:15px;
+        }
+        dt {
+            font-weight: bold;
+        }
+        section {
+            overflow-wrap: break-word;
+            border: 2px solid rgba(96, 100, 113, 0.5);
+            margin-top: 15px;
+            padding: 15px;
+            height: auto;
+            flex:1;
+         }
+         button.button {
+            border: 2px solid rgba(59, 220, 59, 0.5);
+            background-color: rgb(59, 220, 59);
+            padding: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: rgb(255,255,255);
+        }
+        input[type=text] {
+            line-height: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Simple SAML Identity Provider ({{idp.issuer}})</h1>
+        </header>
+        <main>
+            <section id="saml-authentication-request">
+                <h2>SAML Authentication request</h2>
+                <dl>
+                    <dt>Request ID</dt>
+                    <dd>{{authnRequest.id}}</dd>
+                    <dt>Issuer</dt>
+                    <dd>{{authnRequest.issuer}}</dd>
+                    <dt>Destination</dt>
+                    <dd>{{authnRequest.destination}}</dd>
+                    <dt>ACS URL</dt>
+                    <dd>{{authnRequest.acsUrl}}</dd>
+                    <dt>Relay State</dt>
+                    <dd>{{authnRequest.relayState}}</dd>
+                </dl>
+            </section>
+            <section id="SAML Assertion">
+                <h2>Saml Assertion</h2>
+                <form action="/saml/sign-in" method="post" role="form">
+                    <fieldset>
+                        <legend>Subject statement</legend>
+                        <p><label for="email">Subject NameID</label></p>
+                        <p><input type="text" id="email" name="email"  size=25 placeholder="user@example.com" readonly value="{{user.email}}"></p>
+                        <p><button class="button">Sign in</button>
+                        <input name="_authnRequest" type="hidden" value="{{serialize authnRequest}}">
+                        <input name="sessionIndex" type="hidden" value="{{authnRequest.sessionIndex}}">
+                    </fieldset>
+                </form>
+            </section>
+            <section>
+            <h2>Authentication statement</h2>
+            <dl>
+                <dt>Authentication context class</dt>
+                <dd>{{idp.authnContextClassRef}}</dd>
+            </dl>
+        </section>
+      </main>
+    </div>
+</body>
+</html>
