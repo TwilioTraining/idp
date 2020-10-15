@@ -2,6 +2,7 @@ const zlib = require('zlib');
 const parser = require('fast-xml-parser');
 const fs = require('fs');
 const hbs = require('hbs');
+const { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } = require('constants');
 
 hbs.registerHelper('serialize', function(context) {
     return Buffer.from(JSON.stringify(context)).toString('base64');
@@ -34,6 +35,8 @@ exports.handler = (context, event, callback) => {
         trimValues: true,
     }
 
+    config.samlData.idp.issuer = `https://${process.env.ISSUER ? process.env.ISSUER : context.DOMAIN_NAME}/entityid`;
+
     let input = Buffer.from(event.SAMLRequest, 'base64');
     zlib.inflateRaw(input, function(err, buffer) {
         if (err) {
@@ -60,5 +63,4 @@ exports.handler = (context, event, callback) => {
             callback('caught exception', err);
         }
     });
-
 };

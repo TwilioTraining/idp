@@ -1,0 +1,70 @@
+
+body {
+    min-height: 100%;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(96, 100, 113);
+    background-color: #e9eaef;
+    font-stretch: 100%;
+    font-style: normal;
+    font-size: 12px;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-weight: 400;
+    height: auto;
+    letter-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+}
+
+section {
+    margin-top: 20px;
+    padding: 25px;
+    border: solid 2px rgba(155, 77, 202, 0.5);
+    width: 600px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    overflow-wrap: break-word;
+}
+
+h3 {
+    display: inline-block;
+}
+
+label {
+    font-weight: bold;
+}
+
+form {
+   display: grid;
+   grid-template-columns: 150px 1fr;
+   grid-gap: 15px;
+}
+ 
+label {
+    grid-column: 1 / 2;
+}
+ 
+input, button {
+    grid-column: 2 / 3;
+}
+
+button {
+    padding: 7px;
+    background-color: #73e073;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: larger;
+}

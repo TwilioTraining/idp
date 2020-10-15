@@ -116,7 +116,8 @@ dist
 .pnp.*
 
 *.pem
-.twilio-functions
+*.twilio-functions
 .DS_Store
+.vscode
 
 

@@ -17,7 +17,7 @@ const key = fs.readFileSync(keyPath).toString('utf-8');
 
 
 exports.handler = (context, event, callback) => {
-
+    
     const configPath = Runtime.getFunctions()['saml/config'].path;
     const utilsPath = Runtime.getFunctions()['saml/utils'].path;
 
@@ -45,7 +45,7 @@ exports.handler = (context, event, callback) => {
     });
 
     authOptions.nameIdentifier = config.user.email;
-    authOptions.attributes = { "email": config.user.email, "roles": config.user.roles }
+    authOptions.attributes = { "email": config.user.email, "roles": event.roles }
     authOptions.sessionIndex = event.sessionIndex;
 
     saml.create(authOptions, function(err, signedAssertion) {
