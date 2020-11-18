@@ -66,7 +66,7 @@ Copy .env.sample to .env for local development.
 Set the ISSUER in .env to the https forwarding domain that ngrok prints to the console on startup.
 
 ```
-ISSUER=https://[the-https-ngrok-domain].ngrok.io/entityid
+ISSUER=[somenumbers].ngrok.io
 ```
 
 ### Configure Flex for SSO
