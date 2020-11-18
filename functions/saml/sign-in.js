@@ -17,7 +17,7 @@ const key = fs.readFileSync(keyPath).toString('utf-8');
 
 
 exports.handler = (context, event, callback) => {
-    
+
     const configPath = Runtime.getFunctions()['saml/config'].path;
     const utilsPath = Runtime.getFunctions()['saml/utils'].path;
 
@@ -29,7 +29,7 @@ exports.handler = (context, event, callback) => {
     authOptions.cert = cert;
     authOptions.key = key;
 
-    Object.keys(event).forEach(function(key) {
+    Object.keys(event).forEach(function (key) {
         // decode _authnRequest and set values on authnRequest in options
         var buffer;
         if (key === '_authnRequest') {
@@ -45,10 +45,11 @@ exports.handler = (context, event, callback) => {
     });
 
     authOptions.nameIdentifier = config.user.email;
-    authOptions.attributes = { "email": config.user.email, "roles": event.roles }
+    console.log('event.roles', event.roles);
+    authOptions.attributes = { "email": config.user.email, "roles": event.roles, "full_name": config.user.full_name };
     authOptions.sessionIndex = event.sessionIndex;
 
-    saml.create(authOptions, function(err, signedAssertion) {
+    saml.create(authOptions, function (err, signedAssertion) {
         if (err) {
             console.log(err);
             return callback('error', err);

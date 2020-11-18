@@ -65,7 +65,8 @@
         </section>
         <section id="saml-assertion">
             <h3>Saml Assertion</h3>
-            <form action="/saml/sign-in" method="post" role="form">
+            <!-- keep this as a GET because at the moment functions seem to be dropping multiple select POST params -->
+            <form action="/saml/sign-in" method="get" role="form">
                 <label for="email">Subject NameID</label>
                 <input type="text" id="email" name="email" size=25 placeholder="user@example.com" readonly
                     value="{{user.email}}"><br />
